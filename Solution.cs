@@ -1,10 +1,13 @@
-﻿namespace LeetCodeCsharp
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+
+namespace LeetCodeCsharp
 {
     public class Solution
     {
-        public int[] TwoSum(int[] numberList, int target)
+        public static int[] TwoSum(int[] numberList, int target)
         {
-
             for (int i = 0; i < numberList.Length; i++)
             {
                 for (int j = i + 1; j < numberList.Length; j++)
@@ -15,8 +18,20 @@
                     }
                 }
             }
+        
+            return null;
+        }
 
-            return new int[] { };
+        public static int[] TwoSumDict(int[] nums, int target)
+        {
+            var dict = new Dictionary<int, int>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (dict.ContainsKey(target - nums[i]))
+                    return new int[] { dict[target - nums[i]], i };
+                dict[nums[i]] = i;
+            }
+            return null;
         }
     }
 }
