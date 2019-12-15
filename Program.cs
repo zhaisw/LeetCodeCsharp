@@ -17,6 +17,18 @@ namespace LeetCodeCsharp
             // Q1009: Complement of Base 10 Integer
             Console.WriteLine("Complement of int {0} is: {1}", 10, Solution.Q1009BitwiseComplement(10));
 
+            // Q322: Coin change
+            var dict = new Dictionary<string, decimal>();
+
+//            dict.Add("A", 1.5m); // This value will be skipped
+//            dict.Add("B", 2.7m);
+//            dict.Add("C", 1.3m);
+//            dict.Add("D", 3.9m);
+
+            var total = dict.Skip(0).Sum(v => v.Value);
+
+            Console.WriteLine(total);
+
             Console.ReadKey();
         }
     }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using static System.Math;
 
 namespace LeetCodeCsharp
@@ -60,6 +62,35 @@ namespace LeetCodeCsharp
             }
 
             return complementInt;
+        }
+
+        public static int Q322CoinChange(int[] coins, int amount) // TODO
+        {
+            Array.Sort(coins); // Sort the array in ascending
+            IList<int> possibleCombination = new List<int>();
+
+
+            for (int i = coins.Length; i > 0; i--)
+            {
+                int diffAmount = amount;
+                int coinCombinationStepCount = 0; // steps of valid combination
+                int[] tempCoins = coins.Take(i).ToArray(); // temp store the array for other combination search
+
+
+                while (tempCoins.Length > 0 && diffAmount >= tempCoins[0])
+                {
+                    coinCombinationStepCount += (Int32)(diffAmount / tempCoins.Last()); // save the steps of the last element
+                    diffAmount = diffAmount % tempCoins.Last(); // refresh the diff
+                    tempCoins = tempCoins.Take(tempCoins.Length - 1).ToArray(); // remove the last element in the array
+                }
+
+                if (diffAmount == 0)
+                {
+                    possibleCombination.Add(coinCombinationStepCount);
+                }
+            }
+
+            return possibleCombination.Count == 0 ? -1 : possibleCombination.Min();
         }
     }
 }
